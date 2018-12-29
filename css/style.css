@@ -1,0 +1,97 @@
+body {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+
+    background-color: #292b2c;
+    padding: 0;
+    color: white;
+}
+
+a {
+	color: #999;
+	text-decoration: none;
+}
+
+#fretboard{
+    width: 100%;
+    height: 40%;
+    background-color: #666;
+    display: block;
+}
+
+#scale-container {
+    overflow-y: auto;
+    width: 100%;
+    height: 50%;
+}
+
+#scale-list {
+    width: 100%;
+    height: 100%;
+}
+#scale-list td {
+    height: 100px;
+    margin: 0;
+    padding: 0;
+}
+#scale-list .scale-button {
+    background-color: #bbb;
+}
+#scale-list .scale-button:nth-child(odd) {
+    background-color: #aaa;
+}
+
+#container {
+    color: black;
+    width: 1000px;
+    height: 625px;
+    background-color: lightgray;
+    outline: 2px solid white;
+    border: 4px solid black;
+    margin: auto;
+}
+
+#footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.prompt {
+    font-size: 50px;
+    line-height: 300px;
+}
+
+#controls {
+    height: 10%;
+    width: 100%;
+    text-align: center;
+}
+#controls td {
+    border: 1px solid black;
+    width: 33%;
+}
+
+.scale-button {
+    font-size: 25px;
+    border : 0px;
+    width: 100%;
+    height: 100px;
+    transition: 0.1s linear;
+}
+
+.scale-button.selected {
+    background-color: lightgreen !important;
+}
+
+.scale-button:not(.selected):hover {
+    background-color: lightblue !important;
+}

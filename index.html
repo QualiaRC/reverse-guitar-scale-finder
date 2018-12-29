@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Reverse Guitar Scale Finder</title>
+    <link rel="stylesheet" href="./css/style.css" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./js/data.js" charset="UTF-8"></script>
+    <script src="./js/scales.js" charset="UTF-8"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+</head>
+
+<body>
+    <h1>- Reverse Guitar Scale Finder -</h1>
+    <div id="container">
+        <canvas id="fretboard"></canvas>
+        <table id="controls">
+            <tr>
+                <td>
+                    <button style="width:50%;padding:10px;" onclick="clearBoard()">Clear Fretboard</button>
+                </td>
+                <td>
+                    Tuning:<br>
+                    <select id="tuning-select" onchange="setTuning(this)">
+                    </select>
+                </td>
+                <td >
+                    <div style="text-align:left;margin-left:35%;">
+                        <input type="radio" name="sf" value="flat" checked onclick="setSharp(false)"> Flat (b)<br>
+                        <input type="radio" name="sf" value="sharp" onclick="setSharp(true)"> Sharp (#)
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div id="scale-container">
+            <div id="scale-list" class="prompt">
+                select three or more distinct notes
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <p> Created by <a href="https://github.com/QualiaRC">Ryan Clark</a>.<br>
+    </div>
+</body>
+
+</html>
