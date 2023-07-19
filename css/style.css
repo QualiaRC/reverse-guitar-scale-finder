@@ -36,11 +36,6 @@ a {
     width: 100%;
     height: 100%;
 }
-#scale-list td {
-    height: 100px;
-    margin: 0;
-    padding: 0;
-}
 #scale-list .scale-button {
     background-color: #bbb;
 }
@@ -72,12 +67,20 @@ a {
 
 #controls {
     height: 10%;
-    width: 100%;
     text-align: center;
+    display: flex;
+    gap: 2px;
+    padding: 2px;
 }
-#controls td {
+
+#controls > div {
     border: 1px solid black;
-    width: 33%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    flex-direction: column;
 }
 
 .scale-button {

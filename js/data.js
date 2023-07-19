@@ -2,7 +2,7 @@
 
 // A list of all the notes
 // [flat, sharp, count]
-var notes = [
+const notes = [
     ["C",  "C",  0],
     ["Db", "C#", 0],
     ["D",  "D",  0],
@@ -18,7 +18,7 @@ var notes = [
 ]
 
 // Mapping note names to numbers
-var letterToNumber = {
+const letterToNumber = {
     "C": 0,
     "Db": 1, "C#": 1,
     "D": 2,
@@ -35,7 +35,7 @@ var letterToNumber = {
 
 // Mapping scale names to interval sets
 // (eg. Major is whole whole half whole whole whole)
-var scales = {
+const scales = {
     "Major" : [0, 2, 4, 5, 7, 9, 11],
     "Major Pentatonic" : [0, 2, 4, 7, 9],
 
@@ -45,7 +45,7 @@ var scales = {
 }
 
 // Mapping tuning names to lists of notes corresponding with the order of the strings
-var tunings = {
+const tunings = {
     "Standard" : ["E", "A", "D", "G", "B", "E"],
     "Drop D" : ["D", "A", "D", "G", "B", "E"],
     "Drop C#" : ["C#", "G#", "C#", "F#", "A#", "D#"],
@@ -66,23 +66,18 @@ var tunings = {
 // If 3 or more notes selected, return a list of scales in
 // which notesList is a subset
 function getScalesFromNotes(notesList) {
-    if(notesList.length < 3) {
-        return null;
-    }
-    var ret = [];
-    for (var i = 0; i < 12; i++) {
-        for(var key in scales) {
-            var copy = scales[key].slice();
-            for(var j = 0; j < copy.length; j++) {
-                copy[j] += i;
-                if(copy[j] > 11) {
-                    copy[j] -= 12;
-                }
-            }
-            if(notesList.every(val => copy.includes(val))) {
-                ret.push(notes[i][sharps ? 1 : 0] + " " + key)
+    if (notesList.length < 3) return null;
+    let ret = [];
+
+    [...Array(12).keys()].forEach(offset => {
+        for (const key in scales) {
+            const copy = scales[key].slice().map(note => (note + offset) % 12);
+            
+            if (notesList.every(val => copy.includes(val))) {
+                ret.push(notes[offset][sharps ? 1 : 0] + " " + key);
             }
         }
-    }
+    });
+    
     return ret;
 }

@@ -15,24 +15,21 @@
     <h1>- Reverse Guitar Scale Finder -</h1>
     <div id="container">
         <canvas id="fretboard"></canvas>
-        <table id="controls">
-            <tr>
-                <td>
-                    <button style="width:50%;padding:10px;" onclick="clearBoard()">Clear Fretboard</button>
-                </td>
-                <td>
-                    Tuning:<br>
-                    <select id="tuning-select" onchange="setTuning(this)">
-                    </select>
-                </td>
-                <td >
-                    <div style="text-align:left;margin-left:35%;">
-                        <input type="radio" name="sf" value="flat" checked onclick="setSharp(false)"> Flat (b)<br>
-                        <input type="radio" name="sf" value="sharp" onclick="setSharp(true)"> Sharp (#)
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <div id="controls">
+            <div>
+                <button style="width:50%;padding:10px;" onclick="clearBoard()">Clear Fretboard</button>
+            </div>
+            <div>
+                <span>Tuning:</span>
+                <select id="tuning-select" onchange="setTuning(this)"></select>
+            </div>
+            <div>
+                <div>
+                    <input type="radio" name="sf" value="flat" checked onclick="setSharp(false)"> Flat (b)<br />
+                    <input type="radio" name="sf" value="sharp" onclick="setSharp(true)"> Sharp (#)
+                </div>
+            </div>
+        </div>
         <div id="scale-container">
             <div id="scale-list" class="prompt">
                 select three or more distinct notes
