@@ -43,10 +43,10 @@ function setupCanvas() {
     const indices = Range(6).reverse().map(i => letterToNumber[tunings["Standard"][i]]);
 
     // Create all the buttons for the notes
-    Range(6).forEach(y => {
+    for (const y of Range(6)) {
 
         let index = indices[y]; // Initial note (unfretted)
-        Range(frets).forEach(x => {
+        for (const x of Range(frets)) {
             const posX = Math.floor(width / frets * x + width / (frets * 2));
             const posY = Math.floor(height / 6 * y + height / 12);
             ctx.beginPath();
@@ -66,8 +66,8 @@ function setupCanvas() {
             });
             
             index = (index + 1) % 12
-        });
-    });
+        };
+    }
 
     // On canvas click, iterate through all buttons and compare their bounds
     // with the mouse click location. Toggles button active/inactive
@@ -150,7 +150,7 @@ function drawBoard() {
     ctx.lineTo(Math.floor(width / frets) - 2, height);
     ctx.stroke();
     
-    Range(1, frets).forEach(x => {
+    for (const x of Range(1, frets)) {
         ctx.beginPath()
         ctx.moveTo(Math.floor(width / frets * x), 0);
         ctx.lineTo(Math.floor(width / frets * x), height);
@@ -176,15 +176,15 @@ function drawBoard() {
             ctx.fill();
             ctx.stroke();
         }
-    });
+    }
 
     // Strings
-    Range(6).forEach(y => {
+    for (const y of Range(6)) {
         ctx.beginPath();
         ctx.moveTo(Math.floor(width / frets), Math.floor(height / 6 * y + height / 12));
         ctx.lineTo(width, Math.floor(height / 6 * y + height / 12));
         ctx.stroke();
-    });
+    }
 
     // Buttons
     for (const b of buttons) {
@@ -352,14 +352,14 @@ function setTuning(element) {
     // Iterate through all the buttons in order, and rename/renumber them
     let totalIndex = 0
     for (let index of indices) { // 6 strings
-        Range(frets).forEach(() => {
+        for (_ of Range(frets)) {
             buttons[totalIndex].num = index;
             buttons[totalIndex].name = notes[index][0];
 
             index = (index + 1) % 12;
 
             totalIndex++;
-        });
+        }
     }
 
     // Recount all note occurrences (there's probably an easier solution)
