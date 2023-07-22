@@ -11,10 +11,9 @@ let sharps = false; // Boolean determining if sharps or flats are being displaye
 
 $(document).ready(function () {
     // Populate the tunings drop-down menu
-    for (const tuning in tunings) {
-        const $option = $("<option/>").val(tuning).text(tuning);
-        $("#tuning-select").append($option);
-    }
+    $("#tuning-select").append(Object.keys(tunings).map(tuning => {
+        return $("<option/>").val(tuning).text(tuning);
+    }));
 
     // Set up the canvas and draw it
     setupCanvas();
@@ -205,6 +204,8 @@ function drawBoard() {
 // Updates the table/list of possible scales
 function updateTable() {
 
+    const $scaleList = $("#scale-list");
+
     // Get a list of all the selected notes
     const selectedNotes = Range(12).filter(i => notes[i][2] > 0)
     
@@ -212,43 +213,41 @@ function updateTable() {
     const possibleScales = getScalesFromNotes(selectedNotes);
 
     if (!possibleScales) {
-        $("#scale-list").addClass("prompt");
-        $("#scale-list").text("select three or more distinct notes");
+        $scaleList.addClass("prompt");
+        $scaleList.text("select three or more distinct notes");
         return;
     }
 
     // Clear the prompt, empty the table (as you're repopulating it)
-    $("#scale-list").removeClass("prompt");
-    $("#scale-list").empty();
+    $scaleList.removeClass("prompt");
+    $scaleList.empty();
 
-    // Iterate through all the possible scales, and create a corresponding button
-    for (const possibleScale of possibleScales) {
-    
-        // Create the button, then add it to the table
+    // Create buttons and add them to the list
+    $scaleList.append(possibleScales.map(possibleScale => {
         const $button = $("<button/>").text(possibleScale).addClass("scale-button");
-
+    
         // On hover
         // - Update the display to preview scale
         $button.mouseover(function() {
             if ($(this).text() === activeScale) return;
-
+    
             previewing = true;
             drawPreview($(this).text());
         });
-
+    
         // On unhover
         // - Refresh the display to go back to its previous state
         $button.mouseleave(() => {
             previewing = false;
             drawBoard();
         });
-
+    
         // On click
         // - Set as active scale
         // - Update the display to display scale
         $button.click(function() {
             if ($(this).text() === activeScale) return;
-
+    
             $("#scale-list .selected").each(function () {
                 $(this).removeClass("selected");
             });
@@ -256,15 +255,14 @@ function updateTable() {
             activeScale = $(this).text();
             previewing = false;
             setScale();
-
+    
             // Disable tuning change
             $("#tuning-select").prop("disabled", true);
         
         });
 
-        // Add button to the list
-        $("#scale-list").append($button);
-    }
+        return $button;
+    }));
 }
 
 // Draws all the notes in the given scale temporarily
@@ -295,6 +293,8 @@ function drawPreview(scale) {
 
             b.selected = true;
             b.special = b.num === noteIndex;
+
+            break;
         }
     }
     drawBoard();
@@ -399,6 +399,8 @@ function setScale() {
 
             b.selected = true;
             b.special = b.num === noteIndex;
+
+            break;
         }
     }
     drawBoard();
